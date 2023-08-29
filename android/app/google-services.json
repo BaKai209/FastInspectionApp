@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "461217133702",
+    "project_id": "formapp-98917",
+    "storage_bucket": "formapp-98917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461217133702:android:0cf39636fdd57246428d07",
+        "android_client_info": {
+          "package_name": "com.sixsol.fast_inspection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461217133702-sc05tgouv8o5q4iafivcj2lqrjc95p9v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sixsol.fast_inspection",
+            "certificate_hash": "75802b40099b1b1cb55a9ce9e143ee16b6b98a9b"
+          }
+        },
+        {
+          "client_id": "461217133702-lbc2cljgccd46vhpl3rc0k7kk8eu2vqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDASqFgX8aAP5SI_Q30OZsmPk2odWF3uiY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461217133702-lbc2cljgccd46vhpl3rc0k7kk8eu2vqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
