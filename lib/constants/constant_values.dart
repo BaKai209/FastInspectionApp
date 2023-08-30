@@ -105,7 +105,9 @@ const String k3NotePropertyConditionImage = 'k2NotePropertyConditionImage';
 
 const String k5KitchenNumber = 'k5KitchenNumber';
 const String k5KitchenNumberList = 'k5KitchenNumberList';
+const String k5KitchenAdditionalInfoList = 'k5KitchenAdditionalInfoList';
 const String k5BathroomNumberList = 'k5BathroomNumberList';
+const String k5BathroomAdditionalInfoList = 'k5BathroomAdditionalInfoList';
 const String k5LivingRoomNumberList = 'k5LivingRoomNumberList';
 const String k5BuilldingNumberList = 'k5BuilldingNumberList';
 const String k5LuandryNumberList = 'k5LuandryNumberList';
@@ -192,7 +194,6 @@ const String k5RoofIntSarking = 'k5RoofIntSarking';
 const String k5RoofIntGenConndition = 'k5RoofIntGenConndition';
 const String k5RoofIntNote = 'k5RoofIntNote';
 const String k5RoofIntPicture = 'k5RoofIntPicture';
-
 
 const String k6YardFanceDrainage = 'k6YardFanceDrainage';
 const String k6YardFanceFences = 'k6YardFanceFences';

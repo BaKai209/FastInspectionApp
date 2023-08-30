@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fast_inspection/constants/constant_values.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -785,6 +786,7 @@ class BathRoomWidget extends HookWidget {
           const Gap(10),
           MultiSelectOptions(
             optionList: bathroomMultiSelectOptions,
+            prefKey: "$k5BathroomAdditionalInfoList$listValue",
           ),
           const Gap(20),
           const Text(

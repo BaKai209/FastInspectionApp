@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fast_inspection/constants/constant_values.dart';
 import 'package:fast_inspection/my_widgets.dart/multi_select_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -850,6 +851,7 @@ class KitchenWidget extends HookWidget {
           const Gap(10),
           MultiSelectOptions(
             optionList: kitchenMultiSelectOptions,
+            prefKey: "$k5KitchenAdditionalInfoList$listValue",
           ),
           const Gap(20),
           const Text(

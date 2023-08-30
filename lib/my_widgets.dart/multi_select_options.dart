@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MultiSelectOptions extends StatefulWidget {
   final List<String> optionList;
-  const MultiSelectOptions({required this.optionList, super.key});
+  final String prefKey;
+  const MultiSelectOptions(
+      {required this.optionList, required this.prefKey, super.key});
 
   @override
   State<MultiSelectOptions> createState() => _MultiSelectOptionsState();
@@ -11,6 +14,22 @@ class MultiSelectOptions extends StatefulWidget {
 class _MultiSelectOptionsState extends State<MultiSelectOptions> {
   List<String> selectedOptions = [];
   bool opened = false;
+
+  @override
+  void initState() {
+    super.initState();
+    onLoadPref();
+  }
+
+  onLoadPref() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    selectedOptions = prefs.getStringList(widget.prefKey) ?? [];
+  }
+
+  onUpdatePref() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(widget.prefKey, selectedOptions);
+  }
 
   List<Widget> getOptionWidget() {
     List<Widget> array = [];
@@ -28,6 +47,7 @@ class _MultiSelectOptionsState extends State<MultiSelectOptions> {
                     selectedOptions.remove(widget.optionList[i]);
                   }
                   setState(() {});
+                  onUpdatePref();
                 }),
             Expanded(
                 child: InkWell(
@@ -38,6 +58,7 @@ class _MultiSelectOptionsState extends State<MultiSelectOptions> {
                         selectedOptions.add(widget.optionList[i]);
                       }
                       setState(() {});
+                      onUpdatePref();
                     },
                     child: Text(widget.optionList[i]))),
           ],

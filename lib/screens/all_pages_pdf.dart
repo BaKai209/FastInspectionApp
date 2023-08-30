@@ -939,6 +939,16 @@ This Standard Property & Timber Pest Report was produced for the exclusive use o
       layoutResult100 = showTextWithRectangleBigSide(
           pageSize: pageSize,
           layoutResult: layoutResult100,
+          header: 'Additional Info',
+          text: (getStringListAsync('$k5KitchenAdditionalInfoList$value') ?? [])
+              .join(", "));
+      layoutResult100 = showHeaderNewPage('  ', document.pages.add());
+
+      layoutResult100 = showHeaderAfterBig2(
+          '     ', layoutResult100, listman1.isNotEmpty ? 200 : 0);
+      layoutResult100 = showTextWithRectangleBigSide(
+          pageSize: pageSize,
+          layoutResult: layoutResult100,
           header: 'Notes',
           text: getStringAsync('k5NoteKitchen1$value', defaultValue: ''));
       layoutResult100 = showHeaderNewPage('  ', document.pages.add());
@@ -1028,6 +1038,18 @@ This Standard Property & Timber Pest Report was produced for the exclusive use o
               showImageDownSideNewPage('', listman1[3], layoutResult100);
         }
       }
+
+      layoutResult100 = showHeaderAfterBig2(
+          '     ', layoutResult100, listman1.isNotEmpty ? 200 : 0);
+      layoutResult100 = showTextWithRectangleBigSide(
+          pageSize: pageSize,
+          layoutResult: layoutResult100,
+          header: 'Additional Info',
+          text:
+              (getStringListAsync('$k5BathroomAdditionalInfoList$value') ?? [])
+                  .join(", "));
+      layoutResult100 = showHeaderNewPage('  ', document.pages.add());
+
       layoutResult100 = showHeaderAfterBig2(
           '     ', layoutResult100, listman1.isNotEmpty ? 200 : 0);
 
