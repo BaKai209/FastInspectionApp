@@ -22,130 +22,130 @@ class HallwayRoomWidget extends HookWidget {
     'N/A',
     'No access',
   ];
+
+  Future<List<String>> getImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image;
+    List<XFile?> images;
+    List<String> listPath = [];
+    await showInDialog(context,
+        contentPadding: const EdgeInsets.all(0),
+        builder: (context) => SizedBox(
+            height: 300,
+            width: 300,
+            child: Column(
+              children: [
+                Container(
+                  height: 190,
+                  width: 500,
+                  color: AppColors.primaryColor.withOpacity(0.3),
+                  child: const Icon(
+                    Icons.image_outlined,
+                    size: 100,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Please pick where you want to pick the image',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                20.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        images = await picker.pickMultiImage();
+                        for (XFile? value in images) {
+                          if (value != null) {
+                            listPath.add(value.path);
+                          }
+                        }
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Gallery',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        image = await picker.pickImage(
+                            maxHeight: 200,
+                            maxWidth: 200,
+                            source: ImageSource.camera);
+                        if (image != null) {
+                          listPath.add(image!.path);
+                        }
+
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Camera',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )),
+        dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
+    // print(image?.path ?? "");
+    return listPath;
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future<List<String>> getImage() async {
-      final ImagePicker picker = ImagePicker();
-      XFile? image;
-      List<XFile?> images;
-      List<String> listPath = [];
-      await showInDialog(context,
-          contentPadding: const EdgeInsets.all(0),
-          builder: (context) => SizedBox(
-              height: 300,
-              width: 300,
-              child: Column(
-                children: [
-                  Container(
-                    height: 190,
-                    width: 500,
-                    color: AppColors.primaryColor.withOpacity(0.3),
-                    child: const Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'Please pick where you want to pick the image',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  20.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          images = await picker.pickMultiImage();
-                          for (XFile? value in images) {
-                            if (value != null) {
-                              listPath.add(value.path);
-                            }
-                          }
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Gallery',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              maxHeight: 200,
-                              maxWidth: 200,
-                              source: ImageSource.camera);
-                          if (image != null) {
-                            listPath.add(image!.path);
-                          }
-
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Camera',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
-      // print(image?.path ?? "");
-      return listPath;
-    }
-
     final imageChange = useState(true);
-    //propery facade
     final newImageList =
         useState(getStringAsync(k5Hallway1Picture, defaultValue: ''));
     List<String> listman = newImageList.value.split('J@^J');
@@ -153,11 +153,6 @@ class HallwayRoomWidget extends HookWidget {
         (element) => element == 'J@^J' || element.trim().isEmptyOrNull);
     final imageList = useState<List<String>>(listman);
     // property
-
-/*
-    final image2 =
-        useState(getStringAsync(k5Hallway1Picture, defaultValue: ''));
- */
     final bathTiles = useState(
         getStringAsync(k5Hallway1WallTiles, defaultValue: 'Satisfactory'));
     final bathFloor = useState(
@@ -182,20 +177,6 @@ class HallwayRoomWidget extends HookWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /*  if (index != 1)
-            GestureDetector(
-              onTap: () => showConfirmDialog(context, 'Delete Hallway $index',
-                  positiveText: 'Delete', negativeText: 'Cancel', onAccept: () {
-                onTapAction();
-              }),
-              child: const Align(
-                alignment: Alignment.bottomRight,
-                child: Icon(
-                  Icons.cancel_outlined,
-                  color: Colors.red,
-                ),
-              ),
-            ), */
           const Text(
             'Hallway/Foyer etc ',
             style: TextStyle(
@@ -203,13 +184,6 @@ class HallwayRoomWidget extends HookWidget {
                 fontFamily: AppFonts.nunitoSansRegular,
                 fontWeight: FontWeight.w700),
           ),
-          /*   const Text(
-            'Pictures',
-            style: TextStyle(
-                fontSize: 14,
-                fontFamily: AppFonts.nunitoSansRegular,
-                fontWeight: FontWeight.w700),
-          ), */
           const Gap(10),
           const Gap(20),
           const Text(
@@ -315,9 +289,6 @@ class HallwayRoomWidget extends HookWidget {
               onChanged: (value) {
                 bathFloor.value = value!;
                 setValue(k5Hallway1FloorTiles, value);
-                /*  setState(() {
-                      bathFloor = value;
-                    }); */
               },
               items: kitchenList.map<DropdownMenuItem<String>>((value) {
                 return DropdownMenuItem<String>(
@@ -439,9 +410,6 @@ class HallwayRoomWidget extends HookWidget {
               onChanged: (value) {
                 bathShower.value = value!;
                 setValue(k5Hallway1Shower, value);
-                /* setState(() {
-                      bathShower = value;
-                    }); */
               },
               items: kitchenList.map<DropdownMenuItem<String>>((value) {
                 return DropdownMenuItem<String>(
@@ -479,7 +447,6 @@ class HallwayRoomWidget extends HookWidget {
                 Icons.keyboard_arrow_down,
                 color: Colors.grey,
               ),
-              //SvgPicture.asset(AppAsset.arrowDown, color: const Color(0xff000000),),
               dropdownColor: Colors.white,
               elevation: 16,
               isExpanded: true,
@@ -501,9 +468,6 @@ class HallwayRoomWidget extends HookWidget {
               onChanged: (value) {
                 bathWaste.value = value!;
                 setValue(k5Hallway1FloorWaste, value);
-                /*  setState(() {
-                      bathWaste = value;
-                    }); */
               },
               items: kitchenList.map<DropdownMenuItem<String>>((value) {
                 return DropdownMenuItem<String>(
@@ -522,131 +486,6 @@ class HallwayRoomWidget extends HookWidget {
             ),
           ),
           const Gap(20),
-
-          /*  const Text(
-            'Door',
-            style: TextStyle(
-                fontSize: 12,
-                fontFamily: AppFonts.nunitoSansRegular,
-                fontWeight: FontWeight.w700),
-          ),
-          const Gap(10),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 15),
-            decoration: BoxDecoration(
-                color: const Color(0xff96C8A2).withOpacity(0.5),
-                borderRadius: BorderRadius.circular(5)),
-            child: DropdownButton<String>(
-              value: bathDoor.value,
-              icon: const Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.grey,
-              ),
-              //SvgPicture.asset(AppAsset.arrowDown, color: const Color(0xff000000),),
-              dropdownColor: Colors.white,
-              elevation: 16,
-              isExpanded: true,
-              hint: const Text(
-                'Building and pest',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: AppFonts.nunitoSansLight,
-                  color: Colors.black,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 14,
-                fontFamily: AppFonts.nunitoSansLight,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
-              underline: const SizedBox(),
-              onChanged: (value) {
-                bathDoor.value = value!;
-                setValue(k5Hallway1Door, value);
-                /*  setState(() {
-                      bathDoor = value;
-                    }); */
-              },
-              items: kitchenList.map<DropdownMenuItem<String>>((value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppFonts.nunitoSansLight,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          const Gap(20),
-          const Text(
-            'Window',
-            style: TextStyle(
-                fontSize: 12,
-                fontFamily: AppFonts.nunitoSansRegular,
-                fontWeight: FontWeight.w700),
-          ),
-          const Gap(10),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 15),
-            decoration: BoxDecoration(
-                color: const Color(0xff96C8A2).withOpacity(0.5),
-                borderRadius: BorderRadius.circular(5)),
-            child: DropdownButton<String>(
-              value: bathWindow.value,
-              icon: const Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.grey,
-              ),
-              //SvgPicture.asset(AppAsset.arrowDown, color: const Color(0xff000000),),
-              dropdownColor: Colors.white,
-              elevation: 16,
-              isExpanded: true,
-              hint: const Text(
-                'Building and pest',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: AppFonts.nunitoSansLight,
-                  color: Colors.black,
-                ),
-              ),
-              style: const TextStyle(
-                fontSize: 14,
-                fontFamily: AppFonts.nunitoSansLight,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey,
-              ),
-              underline: const SizedBox(),
-              onChanged: (value) {
-                bathWindow.value = value!;
-                setValue(k5Hallway1Window, value);
-                /* setState(() {
-                      bathWindow = value;
-                    }); */
-              },
-              items: kitchenList.map<DropdownMenuItem<String>>((value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppFonts.nunitoSansLight,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          const Gap(20), */
           const Text(
             'Pictures',
             style: TextStyle(
@@ -664,9 +503,7 @@ class HallwayRoomWidget extends HookWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    /*  image2.value = await getImage() ?? '';
-                    setValue(k5Hallway1Picture, image2.value); */
-                    List<String> path = await getImage();
+                    List<String> path = await getImage(context);
 
                     path.addAll(imageList.value);
                     String addedString = '';

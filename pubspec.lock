@@ -301,10 +301,10 @@ packages:
     dependency: transitive
     description:
       name: dom_tools
-      sha256: e6c7e31a73549e8c001665a87db0608d984e98dec084dcf93234798de9340bd0
+      sha256: "275e169f965f34fda5097cf68b72416b2736b7f57ecf97af8aaf7f0634624bec"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.6"
+    version: "2.1.15"
   enum_to_string:
     dependency: transitive
     description:
@@ -676,10 +676,10 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.0"
+    version: "0.18.0"
   io:
     dependency: transitive
     description:
@@ -1225,10 +1225,10 @@ packages:
     dependency: transitive
     description:
       name: swiss_knife
-      sha256: "8baa4c6b61998b240da599ce66013accf84a7019b3a2e2f8bc469fddce071fa1"
+      sha256: "3066fc2ed9a90139cf69f1733f6f9714f7a0a4e6a9d668451d5a1e371da8897b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.2"
+    version: "3.1.5"
   syncfusion_flutter_core:
     dependency: transitive
     description:

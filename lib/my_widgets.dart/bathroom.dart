@@ -8,6 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../constants/colors.dart';
 import '../constants/fonts.dart';
+import 'multi_select_options.dart';
 
 class BathRoomWidget extends HookWidget {
   BathRoomWidget(
@@ -25,251 +26,163 @@ class BathRoomWidget extends HookWidget {
     'N/A',
     'No access',
   ];
+  List<String> bathroomMultiSelectOptions = [
+    'Silicon seal on glass shower screen is leaking and requires correct application of silicon seal.',
+    'Shower interior tile grout and/or silicon seal is faulty and can allow water ingress below. Reseal shower by correct application of grout or sealant.',
+    'Waterproofing membrane behind wall and/or floor tiles appears to be faulty and requires a specialist in this field for further investigation.',
+    'Silicon seal surrounding bath and/or vanity is missing/deteriorated and replacement seal is required to prevent water ingress below.',
+    'Wall tiling is cracked in places and requires replacement.',
+    'Floor tiling is cracked in places and requires replacement.',
+    'Exhaust fan is not operating at time of inspection. Replacement required.',
+    'Timbers in bathroom are deteriorated by moisture and maintenance is required to prevent further degradation.',
+    'Pipe under vanity is leaking and requires rectification.',
+    'Water damage is evident to cabinet under basin.',
+    'Timber vanity cabinet is affected by moisture and requires repair/replacement.',
+    'Timber door architrave/jamb is affected by moisture and requires maintenance.',
+    'Taps exhibit water hammer. Rectification is required to prevent damage to pipes.',
+    'Tap is loose and requires maintenance.',
+    'Bathroom fittings are loose and require correct installation.',
+    'Paint has deteriorated due to moisture and I recommend to install exhaust fan.',
+    'Floor is bouncy in places. Caused by movement of sub floor piers and footings. . Specialist advice required.',
+    'Rising damp is evident to walls in places. Caused by failed damp proof membrane and poor sub floor ventilation. Specialist advice required.',
+    'Mild cracking is evident to walls in places.  Generally caused by reactive soil, movement of sub floor piers and footings. Is non structural but should be monitored going forward.',
+    'Major cracking is evident to walls in places. Is a structural issue. Recommend to contact a structural engineer for advice.',
+    'Door is binding. Caused by movement of sub floor piers and footings. Specialist advice required.',
+    'Window is binding. Caused by movement of sub floor piers and footings. Specialist advice required.',
+    'Toilet pan/cistern is loose and requires correct installation. *Does not affect operation.',
+    'High moisture level detected in wall. I recommend services of a licenced plumber for advice.',
+  ];
+
+  Future<List<String>> getImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image;
+    List<XFile?> images;
+    List<String> listPath = [];
+    await showInDialog(context,
+        contentPadding: const EdgeInsets.all(0),
+        builder: (context) => SizedBox(
+            height: 300,
+            width: 300,
+            child: Column(
+              children: [
+                Container(
+                  height: 190,
+                  width: 500,
+                  color: AppColors.primaryColor.withOpacity(0.3),
+                  child: const Icon(
+                    Icons.image_outlined,
+                    size: 100,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Please pick where you want to pick the image',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                20.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        images = await picker.pickMultiImage();
+                        for (XFile? value in images) {
+                          if (value != null) {
+                            listPath.add(value.path);
+                          }
+                        }
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Gallery',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        image = await picker.pickImage(
+                            maxHeight: 200,
+                            maxWidth: 200,
+                            source: ImageSource.camera);
+                        if (image != null) {
+                          listPath.add(image!.path);
+                        }
+
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Camera',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )),
+        dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
+    // print(image?.path ?? "");
+    return listPath;
+  }
+
   @override
   Widget build(BuildContext context) {
-   /*   Future<String> getImage() async {
-      final ImagePicker picker = ImagePicker();
-      XFile? image;
-      await showInDialog(context,
-          contentPadding: const EdgeInsets.all(0),
-          builder: (context) => SizedBox(
-              height: 300,
-              width: 300,
-              child: Column(
-                children: [
-                  Container(
-                    height: 190,
-                    width: 500,
-                    color: AppColors.primaryColor.withOpacity(0.3),
-                    child: const Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'Please pick where you want to pick the image',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  20.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              source: ImageSource.gallery);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Gallery',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              source: ImageSource.camera);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Camera',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
-      print(image?.path ?? "");
-      return image?.path ?? "";
-    }
-
- */
-     Future<List<String>> getImage() async {
-      final ImagePicker picker = ImagePicker();
-      XFile? image;
-      List<XFile?> images;
-      List<String> listPath = [];
-      await showInDialog(context,
-          contentPadding: const EdgeInsets.all(0),
-          builder: (context) => SizedBox(
-              height: 300,
-              width: 300,
-              child: Column(
-                children: [
-                  Container(
-                    height: 190,
-                    width: 500,
-                    color: AppColors.primaryColor.withOpacity(0.3),
-                    child: const Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'Please pick where you want to pick the image',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  20.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          images = await picker.pickMultiImage();
-                          for (XFile? value in images) {
-                            if (value != null) {
-                              listPath.add(value.path);
-                            }
-                          }
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Gallery',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              maxHeight: 200,
-                              maxWidth: 200,
-                              source: ImageSource.camera);
-                          if (image != null) {
-                            listPath.add(image!.path);
-                          }
-
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Camera',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
-      // print(image?.path ?? "");
-      return listPath;
-    }
-
-
     final imageChange = useState(true);
     //propery present
-    final newImageList =
-        useState(getStringAsync('k5Bathroom1Picture$listValue', defaultValue: ''));
+    final newImageList = useState(
+        getStringAsync('k5Bathroom1Picture$listValue', defaultValue: ''));
     List<String> listman = newImageList.value.split('J@^J');
     listman.removeWhere(
         (element) => element == 'J@^J' || element.trim().isEmptyOrNull);
     final imageList = useState<List<String>>(listman);
-
-
-   
-   /*  final image2 = useState(
-        getStringAsync('k5Bathroom1Picture$listValue', defaultValue: '')); */
 
     final bathTiles = useState(getStringAsync('k5Bathroom1WallTiles$listValue',
         defaultValue: 'Satisfactory'));
@@ -316,13 +229,6 @@ class BathRoomWidget extends HookWidget {
                 fontFamily: AppFonts.nunitoSansRegular,
                 fontWeight: FontWeight.w700),
           ),
-          /*   const Text(
-            'Pictures',
-            style: TextStyle(
-                fontSize: 14,
-                fontFamily: AppFonts.nunitoSansRegular,
-                fontWeight: FontWeight.w700),
-          ), */
           const Gap(10),
           const Gap(20),
           const Text(
@@ -776,23 +682,23 @@ class BathRoomWidget extends HookWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                   /*  image2.value = await getImage() ?? '';
+                    /*  image2.value = await getImage() ?? '';
                     setValue('k5Bathroom1Picture$listValue', image2.value); */
 
-                     List<String> path = await getImage();
+                    List<String> path = await getImage(context);
 
-                        path.addAll(imageList.value);
-                        String addedString = '';
-                        for (String vlist in path) {
-                          addedString = "${addedString}J@^J$vlist";
-                        }
+                    path.addAll(imageList.value);
+                    String addedString = '';
+                    for (String vlist in path) {
+                      addedString = "${addedString}J@^J$vlist";
+                    }
 
-                        imageChange.value = false;
-                        imageList.value.clear();
-                        imageList.value.addAll(path);
+                    imageChange.value = false;
+                    imageList.value.clear();
+                    imageList.value.addAll(path);
 
-                        setValue('k5Bathroom1Picture$listValue', addedString);
-                        imageChange.value = true;
+                    setValue('k5Bathroom1Picture$listValue', addedString);
+                    imageChange.value = true;
                   },
                   child: Container(
                     width: 100,
@@ -812,71 +718,73 @@ class BathRoomWidget extends HookWidget {
                     ),
                   ),
                 ),
-               /*  if (!image2.value.trim().isEmptyOrNull)
-                  SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: Image.file(
-                      File(image2.value),
-                      height: 100,
-                      width: 100,
-                    ),
-                  ) */
-                     if (imageList.value.isNotEmpty && imageChange.value)
-                      SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          children: [
-                            ...imageList.value.map((e) {
-                              print(e);
-                              print(e);
-                              return e == 'J@^J'.trim() || e.trim().isEmpty
-                                  ? Container()
-                                  : Column(
-                                      children: [
-                                        ListTile(
-                                          leading: SizedBox(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image.file(
-                                              File(e),
-                                              height: 100,
-                                              width: 100,
-                                            ),
-                                          ),
-                                          trailing: GestureDetector(
-                                            onTap: () {
-                                              imageList.value.remove(e);
-                                              String addedString = '';
-                                              for (String vlist
-                                                  in imageList.value) {
-                                                addedString =
-                                                    "${addedString}J@^J$vlist";
-                                              }
-
-                                              imageList.value = imageList.value;
-
-                                              setValue(
-                                                  'k5Bathroom1Picture$listValue', addedString);
-                                              imageChange.value = false;
-                                              imageChange.value = true;
-                                            },
-                                            child: const Icon(
-                                              Icons.cancel_outlined,
-                                              color: Colors.red,
-                                            ),
-                                          ),
+                if (imageList.value.isNotEmpty && imageChange.value)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        ...imageList.value.map((e) {
+                          print(e);
+                          print(e);
+                          return e == 'J@^J'.trim() || e.trim().isEmpty
+                              ? Container()
+                              : Column(
+                                  children: [
+                                    ListTile(
+                                      leading: SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: Image.file(
+                                          File(e),
+                                          height: 100,
+                                          width: 100,
                                         ),
-                                        const Divider()
-                                      ],
-                                    );
-                            })
-                          ],
-                        ),
-                      )
-                 
+                                      ),
+                                      trailing: GestureDetector(
+                                        onTap: () {
+                                          imageList.value.remove(e);
+                                          String addedString = '';
+                                          for (String vlist
+                                              in imageList.value) {
+                                            addedString =
+                                                "${addedString}J@^J$vlist";
+                                          }
+
+                                          imageList.value = imageList.value;
+
+                                          setValue(
+                                              'k5Bathroom1Picture$listValue',
+                                              addedString);
+                                          imageChange.value = false;
+                                          imageChange.value = true;
+                                        },
+                                        child: const Icon(
+                                          Icons.cancel_outlined,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider()
+                                  ],
+                                );
+                        })
+                      ],
+                    ),
+                  )
               ],
             ),
+          ),
+          const Gap(20),
+          const Text(
+            'Additional Information',
+            style: TextStyle(
+                fontSize: 14,
+                fontFamily: AppFonts.nunitoSansRegular,
+                fontWeight: FontWeight.w700),
+          ),
+          const Gap(10),
+          MultiSelectOptions(
+            optionList: bathroomMultiSelectOptions,
           ),
           const Gap(20),
           const Text(
