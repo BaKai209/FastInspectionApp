@@ -30,116 +30,116 @@ class Page5 extends HookWidget {
     'Pest only',
   ];
 
+  Future<String> getImage(BuildContext context) async {
+    final ImagePicker picker = ImagePicker();
+    XFile? image;
+    await showInDialog(context,
+        contentPadding: const EdgeInsets.all(0),
+        builder: (context) => SizedBox(
+            height: 300,
+            width: 300,
+            child: Column(
+              children: [
+                Container(
+                  height: 190,
+                  width: 500,
+                  color: AppColors.primaryColor.withOpacity(0.3),
+                  child: const Icon(
+                    Icons.image_outlined,
+                    size: 100,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    'Please pick where you want to pick the image',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                20.height,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () async {
+                        image =
+                            await picker.pickImage(source: ImageSource.gallery);
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Gallery',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        image = await picker.pickImage(
+                            imageQuality: 100, source: ImageSource.camera);
+                        context.pop();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // radius of 10
+                            color: AppColors
+                                .primaryColor // green as background color
+                            ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.camera,
+                              size: 25,
+                              color: Colors.white,
+                            ),
+                            5.width,
+                            const Text(
+                              'Camera',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )),
+        dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
+    print(image?.path ?? "");
+    return image?.path ?? "";
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future<String> getImage() async {
-      final ImagePicker picker = ImagePicker();
-      XFile? image;
-      await showInDialog(context,
-          contentPadding: const EdgeInsets.all(0),
-          builder: (context) => SizedBox(
-              height: 300,
-              width: 300,
-              child: Column(
-                children: [
-                  Container(
-                    height: 190,
-                    width: 500,
-                    color: AppColors.primaryColor.withOpacity(0.3),
-                    child: const Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'Please pick where you want to pick the image',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  20.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              source: ImageSource.gallery);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Gallery',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              imageQuality: 100, source: ImageSource.camera);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Camera',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
-      print(image?.path ?? "");
-      return image?.path ?? "";
-    }
-
     List<String> kitchenItems = [];
 
     //getPref();
@@ -392,10 +392,3 @@ class Page5 extends HookWidget {
     );
   }
 }
-/* 
-  PdfLayoutResult layoutResultsp = showHeader2('      ', layoutResult60);
-   
-   final newPagepnj12w = document.pages.add();
-  PdfLayoutResult layoutResultpageplkloq =
-      showHeaderNewPage('  ', newPagepnj12w);
- */

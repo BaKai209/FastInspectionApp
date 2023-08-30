@@ -24,7 +24,7 @@ class HallwayRoomWidget extends HookWidget {
   ];
   @override
   Widget build(BuildContext context) {
-       Future<List<String>> getImage() async {
+    Future<List<String>> getImage() async {
       final ImagePicker picker = ImagePicker();
       XFile? image;
       List<XFile?> images;
@@ -144,115 +144,6 @@ class HallwayRoomWidget extends HookWidget {
       return listPath;
     }
 
-  /*    Future<String> getImage() async {
-      final ImagePicker picker = ImagePicker();
-      XFile? image;
-      await showInDialog(context,
-          contentPadding: const EdgeInsets.all(0),
-          builder: (context) => SizedBox(
-              height: 300,
-              width: 300,
-              child: Column(
-                children: [
-                  Container(
-                    height: 190,
-                    width: 500,
-                    color: AppColors.primaryColor.withOpacity(0.3),
-                    child: const Icon(
-                      Icons.image_outlined,
-                      size: 100,
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      'Please pick where you want to pick the image',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  20.height,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              source: ImageSource.gallery);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera_alt_outlined,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Gallery',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          image = await picker.pickImage(
-                              source: ImageSource.camera);
-                          context.pop();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(10), // radius of 10
-                              color: AppColors
-                                  .primaryColor // green as background color
-                              ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.camera,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              5.width,
-                              const Text(
-                                'Camera',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )),
-          dialogAnimation: DialogAnimation.SLIDE_BOTTOM_TOP);
-      print(image?.path ?? "");
-      return image?.path ?? "";
-    }
- */
-
     final imageChange = useState(true);
     //propery facade
     final newImageList =
@@ -263,7 +154,7 @@ class HallwayRoomWidget extends HookWidget {
     final imageList = useState<List<String>>(listman);
     // property
 
-/* 
+/*
     final image2 =
         useState(getStringAsync(k5Hallway1Picture, defaultValue: ''));
  */
@@ -631,8 +522,8 @@ class HallwayRoomWidget extends HookWidget {
             ),
           ),
           const Gap(20),
-         
-         /*  const Text(
+
+          /*  const Text(
             'Door',
             style: TextStyle(
                 fontSize: 12,
@@ -773,42 +664,42 @@ class HallwayRoomWidget extends HookWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                   /*  image2.value = await getImage() ?? '';
+                    /*  image2.value = await getImage() ?? '';
                     setValue(k5Hallway1Picture, image2.value); */
-                     List<String> path = await getImage();
+                    List<String> path = await getImage();
 
-                        path.addAll(imageList.value);
-                        String addedString = '';
-                        for (String vlist in path) {
-                          addedString = "${addedString}J@^J$vlist";
-                        }
+                    path.addAll(imageList.value);
+                    String addedString = '';
+                    for (String vlist in path) {
+                      addedString = "${addedString}J@^J$vlist";
+                    }
 
-                        imageChange.value = false;
-                        imageList.value.clear();
-                        imageList.value.addAll(path);
+                    imageChange.value = false;
+                    imageList.value.clear();
+                    imageList.value.addAll(path);
 
-                        setValue(k5Hallway1Picture, addedString);
-                        imageChange.value = true;
+                    setValue(k5Hallway1Picture, addedString);
+                    imageChange.value = true;
                   },
                   child: Container(
-                        width: 100,
-                        decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 15),
-                          child: Text(
-                            'Upload',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: AppFonts.nunitoSansRegular),
-                          ),
-                        ),
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+                      child: Text(
+                        'Upload',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: AppFonts.nunitoSansRegular),
                       ),
+                    ),
+                  ),
                 ),
-               /*  if (!image2.value.trim().isEmptyOrNull)
+                /*  if (!image2.value.trim().isEmptyOrNull)
                   SizedBox(
                     height: 100,
                     width: 100,
@@ -819,59 +710,58 @@ class HallwayRoomWidget extends HookWidget {
                     ),
                   ) */
 
-                    if (imageList.value.isNotEmpty && imageChange.value)
-                      SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          children: [
-                            ...imageList.value.map((e) {
-                              print(e);
-                              print(e);
-                              return e == 'J@^J'.trim() || e.trim().isEmpty
-                                  ? Container()
-                                  : Column(
-                                      children: [
-                                        ListTile(
-                                          leading: SizedBox(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image.file(
-                                              File(e),
-                                              height: 100,
-                                              width: 100,
-                                            ),
-                                          ),
-                                          trailing: GestureDetector(
-                                            onTap: () {
-                                              imageList.value.remove(e);
-                                              String addedString = '';
-                                              for (String vlist
-                                                  in imageList.value) {
-                                                addedString =
-                                                    "${addedString}J@^J$vlist";
-                                              }
-
-                                              imageList.value = imageList.value;
-
-                                              setValue(
-                                                  k5Hallway1Picture, addedString);
-                                              imageChange.value = false;
-                                              imageChange.value = true;
-                                            },
-                                            child: const Icon(
-                                              Icons.cancel_outlined,
-                                              color: Colors.red,
-                                            ),
-                                          ),
+                if (imageList.value.isNotEmpty && imageChange.value)
+                  SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        ...imageList.value.map((e) {
+                          print(e);
+                          print(e);
+                          return e == 'J@^J'.trim() || e.trim().isEmpty
+                              ? Container()
+                              : Column(
+                                  children: [
+                                    ListTile(
+                                      leading: SizedBox(
+                                        height: 50,
+                                        width: 50,
+                                        child: Image.file(
+                                          File(e),
+                                          height: 100,
+                                          width: 100,
                                         ),
-                                        const Divider()
-                                      ],
-                                    );
-                            })
-                          ],
-                        ),
-                      )
-                 
+                                      ),
+                                      trailing: GestureDetector(
+                                        onTap: () {
+                                          imageList.value.remove(e);
+                                          String addedString = '';
+                                          for (String vlist
+                                              in imageList.value) {
+                                            addedString =
+                                                "${addedString}J@^J$vlist";
+                                          }
+
+                                          imageList.value = imageList.value;
+
+                                          setValue(
+                                              k5Hallway1Picture, addedString);
+                                          imageChange.value = false;
+                                          imageChange.value = true;
+                                        },
+                                        child: const Icon(
+                                          Icons.cancel_outlined,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                    const Divider()
+                                  ],
+                                );
+                        })
+                      ],
+                    ),
+                  )
               ],
             ),
           ),
