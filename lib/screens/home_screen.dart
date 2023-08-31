@@ -751,16 +751,91 @@ const String k5BuilldingNumberList = 'k5BuilldingNumberList'; */
                                     : false,
                                 child: GestureDetector(
                                   onTap: () async {
-                                    final android =
-                                        await DeviceInfoPlugin().androidInfo;
+                                    if (Platform.isAndroid) {
+                                      final android =
+                                          await DeviceInfoPlugin().androidInfo;
 
-                                    if (await Permission.storage
-                                            .request()
-                                            .isGranted &&
-                                        android.version.sdkInt < 33) {
+                                      if (await Permission.storage
+                                              .request()
+                                              .isGranted &&
+                                          android.version.sdkInt < 33) {
+                                        showLoader(context);
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+
+                                        String path =
+                                            await PdfClass.generateInvoice('');
+                                        final file = File(path);
+                                        file.readAsBytesSync();
+                                        await FileSaver.instance.saveFile(
+                                            name:
+                                                'fastinspection_${getStringAsync(k1PropertyBusinessName, defaultValue: '')}',
+                                            filePath: path,
+                                            mimeType: MimeType.pdf,
+                                            ext: '.pdf');
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        hideLoader();
+
+                                        snackBar(context,
+                                            title: "Download complete",
+                                            backgroundColor: Colors.green);
+                                      } else if (android.version.sdkInt > 32) {
+                                        showLoader(context);
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+
+                                        String path =
+                                            await PdfClass.generateInvoice('');
+                                        final file = File(path);
+                                        file.readAsBytesSync();
+                                        await CRFileSaver.saveFile(path,
+                                            destinationFileName:
+                                                'fastinspection_${getStringAsync(k1PropertyBusinessName, defaultValue: '')}');
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        hideLoader();
+                                        snackBar(context,
+                                            title: "Download complete",
+                                            backgroundColor: Colors.green);
+                                      } else {
+                                        showLoader(context);
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(seconds: 2));
+
+                                        String path =
+                                            await PdfClass.generateInvoice('');
+                                        final file = File(path);
+                                        file.readAsBytesSync();
+                                        await FileSaver.instance.saveFile(
+                                            name:
+                                                'fastinspection_${getStringAsync(k1PropertyBusinessName, defaultValue: '')}',
+                                            filePath: path,
+                                            mimeType: MimeType.pdf,
+                                            ext: '.pdf');
+                                        setState(() {
+                                          isLoading = false;
+                                        });
+                                        hideLoader();
+
+                                        snackBar(context,
+                                            title: "Download complete",
+                                            backgroundColor: Colors.green);
+                                      }
+                                    } else {
                                       showLoader(context);
                                       setState(() {
-                                        isLoading = false;
                                         isLoading = true;
                                       });
                                       await Future.delayed(
@@ -769,7 +844,7 @@ const String k5BuilldingNumberList = 'k5BuilldingNumberList'; */
                                       String path =
                                           await PdfClass.generateInvoice('');
                                       final file = File(path);
-                                      Uint8List data = file.readAsBytesSync();
+                                      file.readAsBytesSync();
                                       await FileSaver.instance.saveFile(
                                           name:
                                               'fastinspection_${getStringAsync(k1PropertyBusinessName, defaultValue: '')}',
@@ -777,35 +852,10 @@ const String k5BuilldingNumberList = 'k5BuilldingNumberList'; */
                                           mimeType: MimeType.pdf,
                                           ext: '.pdf');
                                       setState(() {
-                                        isLoading = true;
                                         isLoading = false;
                                       });
                                       hideLoader();
 
-                                      snackBar(context,
-                                          title: "Download complete",
-                                          backgroundColor: Colors.green);
-                                    } else if (android.version.sdkInt > 32) {
-                                      showLoader(context);
-                                      setState(() {
-                                        isLoading = false;
-                                        isLoading = true;
-                                      });
-                                      await Future.delayed(
-                                          const Duration(seconds: 2));
-
-                                      String path =
-                                          await PdfClass.generateInvoice('');
-                                      final file = File(path);
-                                      Uint8List data = file.readAsBytesSync();
-                                      await CRFileSaver.saveFile(path,
-                                          destinationFileName:
-                                              'fastinspection_${getStringAsync(k1PropertyBusinessName, defaultValue: '')}');
-                                      setState(() {
-                                        isLoading = true;
-                                        isLoading = false;
-                                      });
-                                      hideLoader();
                                       snackBar(context,
                                           title: "Download complete",
                                           backgroundColor: Colors.green);
